@@ -2,10 +2,9 @@ var cityInput = document.querySelector('#city-input');
 var cityBtn = document.querySelector('#search-btn');
 var cityNameEl = document.querySelector('#city-name');
 var cityArr = [];
-var apiKey = '6081e8c2e9006b9910a04ecbb1c4c2af'; // please enter API Key here
+var apiKey = '6081e8c2e9006b9910a04ecbb1c4c2af';
 
 var formHandler = function(event) {
-    // formats city name
     var selectedCity = cityInput
         .value
         .trim()
@@ -22,7 +21,6 @@ var formHandler = function(event) {
     };
 };
 
-// uses 'current weather api' to fetch latitude and longitude
 var getCoords = function(city) {
     var currentWeatherApi = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
 
@@ -33,7 +31,6 @@ var getCoords = function(city) {
                 var lat = data.coord['lat'];
                 getCityForecast(city, lon, lat);
 
-                // saves searched city and refreshes recent city list
                 if (document.querySelector('.city-list')) {
                     document.querySelector('.city-list').remove();
                 }
@@ -50,14 +47,12 @@ var getCoords = function(city) {
     })
 }
 
-// uses latitude and longitude to fetch current weather and five-day forecast
 var getCityForecast = function(city, lon, lat) {
     var oneCallApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,hourly,alerts&appid=${apiKey}`;
     fetch(oneCallApi).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
 
-                // identifies city name in forecast
                 cityNameEl.textContent = `${city} (${moment().format("M/D/YYYY")})`; 
 
                 console.log(data)
@@ -69,14 +64,12 @@ var getCityForecast = function(city, lon, lat) {
     })
 }
 
-// helper function to select HTML element and display rounded temperature
 var displayTemp = function(element, temperature) {
     var tempEl = document.querySelector(element);
     var elementText = Math.round(temperature);
     tempEl.textContent = elementText;
 }
 
-// displays current forecast
 var currentForecast = function(forecast) {
     
     var forecastEl = document.querySelector('.city-forecast');
@@ -108,7 +101,6 @@ var currentForecast = function(forecast) {
     var currentUvi = forecast.current['uvi'];
     uviEl.textContent = currentUvi;
 
-    // styles UV index
     switch (true) {
         case (currentUvi <= 2):
             uviEl.className = 'badge badge-success';
@@ -125,7 +117,6 @@ var currentForecast = function(forecast) {
     }
 }
 
-// display five day forecast
 var fiveDayForecast = function(forecast) { 
     
     for (var i = 1; i < 6; i++) {
@@ -146,10 +137,9 @@ var fiveDayForecast = function(forecast) {
     }
 }
 
-// saves cities into local storage
+
 var saveCity = function(city) {
 
-    // prevents duplicate city from being saved and moves it to end of array
     for (var i = 0; i < cityArr.length; i++) {
         if (city === cityArr[i]) {
             cityArr.splice(i, 1);
@@ -160,7 +150,6 @@ var saveCity = function(city) {
     localStorage.setItem('cities', JSON.stringify(cityArr));
 }
 
-// loads cities from local storage
 var loadCities = function() {
     cityArr = JSON.parse(localStorage.getItem('cities'));
 
@@ -168,7 +157,6 @@ var loadCities = function() {
         cityArr = [];
         return false;
     } else if (cityArr.length > 5) {
-        // saves only the five most recent cities
         cityArr.shift();
     }
 
@@ -199,7 +187,6 @@ var selectRecent = function(event) {
 loadCities();
 cityBtn.addEventListener('click', formHandler)
 
-// searches for city on ENTER key
 cityInput.addEventListener('keyup', function(event) {
     if (event.keyCode === 13) {
         cityBtn.click();

@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+nav {
+    color: white;
+    font-size: 46px;
+    text-align: center;
+}
+
+
+
+#search-section {
+    background-color: rgb(240, 252, 252);
+}
+
+
+
+.city {
+    border: none;
+}
+
+.card-city {
+    border: none;
+}
+
+
+.cbforecast {
+    margin: 20px;
+}
+
+
+.main-container {
+    padding-bottom: 20px;
+}
+
+.row-blue {
+    background-color: rgb(240, 252, 252);
+}
+
+@media screen and (min-width: 40em) {
+    .card {
+       max-width: calc(50% -  1em);
+    }
+}
+ 
+@media screen and (min-width: 60em) {
+    .card {
+        max-width: calc(25% - 1em);
+    }
+}

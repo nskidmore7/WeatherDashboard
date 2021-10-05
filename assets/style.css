@@ -1,46 +1,11 @@
-* {
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+.hide {
+    display: none;
 }
 
-
-
-nav {
-    color: white;
-    font-size: 46px;
-    text-align: center;
+.weather-icon {
+    height: 50px;
+    width: 50px;
 }
-
-
-
-#search-section {
-    background-color: rgb(240, 252, 252);
-}
-
-
-
-.city {
-    border: none;
-}
-
-.card-city {
-    border: none;
-}
-
-
-.cbforecast {
-    margin: 20px;
-}
-
-
-.main-container {
-    padding-bottom: 20px;
-}
-
-.row-blue {
-    background-color: rgb(240, 252, 252);
-}
-
 @media screen and (min-width: 40em) {
     .card {
        max-width: calc(50% -  1em);

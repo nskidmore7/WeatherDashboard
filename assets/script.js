@@ -113,7 +113,7 @@ var currentForecast = function(forecast) {
             break;
         default:
             uviEl.className = 'badge text-light';
-            uviEl.setAttribute('style', 'background-color: #553C7B');
+            uviEl.setAttribute('style', 'background-color: red ');
     }
 }
 

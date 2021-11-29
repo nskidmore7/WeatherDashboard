@@ -45,7 +45,7 @@ var getCoords = function(city) {
     .catch(function(error) {
         alert('Unable to load weather.');
     })
-}
+};
 
 var getCityForecast = function(city, lon, lat) {
     var oneCallApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,hourly,alerts&appid=${apiKey}`;
@@ -62,13 +62,13 @@ var getCityForecast = function(city, lon, lat) {
             });
         }
     })
-}
+};
 
 var displayTemp = function(element, temperature) {
     var tempEl = document.querySelector(element);
     var elementText = Math.round(temperature);
     tempEl.textContent = elementText;
-}
+};
 
 var currentForecast = function(forecast) {
     
@@ -115,7 +115,7 @@ var currentForecast = function(forecast) {
             uviEl.className = 'badge text-light';
             uviEl.setAttribute('style', 'background-color: red ');
     }
-}
+};
 
 var fiveDayForecast = function(forecast) { 
     
@@ -135,7 +135,7 @@ var fiveDayForecast = function(forecast) {
         var humiditySpan = document.querySelector('#humidity-' + i);
         humiditySpan.textContent = forecast.daily[i].humidity;
     }
-}
+};
 
 
 var saveCity = function(city) {
@@ -148,7 +148,7 @@ var saveCity = function(city) {
 
     cityArr.push(city);
     localStorage.setItem('cities', JSON.stringify(cityArr));
-}
+};
 
 var loadCities = function() {
     cityArr = JSON.parse(localStorage.getItem('cities'));
@@ -176,13 +176,13 @@ var loadCities = function() {
 
     var cityList = document.querySelector('.city-list');
     cityList.addEventListener('click', selectRecent)
-}
+};
 
 var selectRecent = function(event) {
     var clickedCity = event.target.getAttribute('value');
 
     getCoords(clickedCity);
-}
+};
 
 loadCities();
 cityBtn.addEventListener('click', formHandler)
